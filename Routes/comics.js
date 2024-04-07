@@ -5,10 +5,13 @@ const axios = require("axios");
 // Route pour acceder a tout les comics
 router.get("/comics", async (req, res) => {
   try {
+    const limit = req.query.limit || 100;
+    const skip = req.query.skip || 0;
+    const title = req.query.title || "";
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.API_KEY}&limit=${limit}&skip=${skip}&title=${title}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.log(error.response);
@@ -21,7 +24,7 @@ router.get("/comics/:characterId", async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params.characterId}?apiKey=${process.env.API_KEY}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.log(error.response);
@@ -34,7 +37,7 @@ router.get("/comic/:comicId", async (req, res) => {
     const response = await axios.get(
       `https://lereacteur-marvel-api.herokuapp.com/comic/${req.params.comicId}?apiKey=${process.env.API_KEY}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.log(error.response);

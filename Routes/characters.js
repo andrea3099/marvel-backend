@@ -5,8 +5,11 @@ const axios = require("axios");
 // Route pour acceder a tout les personnages
 router.get("/characters", async (req, res) => {
   try {
+    const limit = req.query.limit || 100;
+    const skip = req.query.skip || 0;
+    const name = req.query.name || "";
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=${limit}&skip=${skip}&name=${name}`
     );
     console.log(response.data);
     res.status(200).json(response.data);
