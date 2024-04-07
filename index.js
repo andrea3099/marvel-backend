@@ -6,7 +6,7 @@ app.use(cors());
 const mongoose = require("mongoose");
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost/marvel");
+mongoose.connect(process.env.MONGODB_URI);
 
 //import des routes
 const comicsRoute = require("./Routes/comics");
